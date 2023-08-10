@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() { 
-     this.authService.signIn(this.loginForm.value.email ,this.loginForm.value.email.password).subscribe((res:any) => {
+     this.authService.signIn(this.loginForm.value.email ,this.loginForm.value.password).subscribe((res:any) => {
       if(res){
         this.router.navigate(['web/dashboard'])
       }
