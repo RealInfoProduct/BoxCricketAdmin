@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import * as moment from 'moment';
 import { msgType } from 'src/assets/constant/message';
 import { AuthService } from 'src/app/service/auth.service';
+import { FirebaseService } from 'src/app/service/firebase.service';
 
 
 @Component({
@@ -20,18 +21,25 @@ export class LoginComponent implements OnInit {
   userList:any;
   employeeList:any;
   allCompanyEmployees  : any = [];
+  registrationList  : any = [];
   matchedEmployee : any;
   CompanyLogin : boolean = false
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private firebaseService: FirebaseService
   ) { }
 
               
   ngOnInit(): void {
     this.loginFormBuilder()
+    this.firebaseService.getAllRegistrationData().subscribe((res:any) => {
+      if (res) {
+        this.registrationList = res
+      }
+    })
   }
   loginFormBuilder(){
     this.loginForm = this.formBuilder.group({
@@ -42,11 +50,20 @@ export class LoginComponent implements OnInit {
   }
 
   submit() { 
-     this.authService.signIn(this.loginForm.value.email ,this.loginForm.value.password).subscribe((res:any) => {
-      if(res){
-        this.router.navigate(['web/dashboard'])
+    if (this.registrationList.length > 0) {
+      const employeeFind = this.registrationList.find((id:any) => id.email === this.loginForm.value.email)
+      if(employeeFind){
+        localStorage.clear()
+        localStorage.setItem("UserId",employeeFind.id)
+      } else {
+        this.authService.signIn(this.loginForm.value.email ,this.loginForm.value.password).subscribe((res:any) => {
+         if(res){
+           this.router.navigate(['web/dashboard'])
+         }
+        })
       }
-     })
+    }
+
   }
 
 }

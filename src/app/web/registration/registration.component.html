@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row m-0 table-body">
-            <p-table [value]="technologyList" [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
+            <p-table [value]="registrationData" [paginator]="false" [rows]="10" [showCurrentPageReport]="true"
                 [scrollable]="true" scrollDirection="both" responsiveLayout="scroll"
                 [style]="{'margin-top': '8px'}"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -31,13 +31,13 @@
                 <ng-template pTemplate="body" let-item let-i="rowIndex">
                     <tr>
                         <td style="width: 5%;">{{i+1}}</td>
-                        <td style="width: 15%;">Book</td>
-                        <td style="width: 15%;">Box</td>
-                        <td style="width: 15%;">bookbox@gmail.com</td>
-                        <td style="width: 15%;">bookbox@123</td>
-                        <td style="width: 25%;">Surat</td>
-                        <td style="width: 15%;">5</td>
-                        <td style="width: 15%;">98568 58485</td>
+                        <td style="width: 15%;">{{item.firstName}}</td>
+                        <td style="width: 15%;">{{item.lastName}}</td>
+                        <td style="width: 15%;">{{item.email}}</td>
+                        <td style="width: 15%;">{{item.password}}</td>
+                        <td style="width: 25%;">{{item.boxAddress}}</td>
+                        <td style="width: 15%;">{{item.boxNo}}</td>
+                        <td style="width: 15%;">{{item.mobileNo}}</td>
                         <td style="width: 10%;">
                             <div class="button_icon_edit" data-bs-toggle="modal" data-bs-target="#FirmModal" (click)="editRegistration(item)" >
                                 <i class="fa fa-pencil" aria-hidden="true"></i>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, doc, Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore } from '@angular/fire/firestore';
 import { updateDoc } from 'firebase/firestore';
 import { RegistrationList } from 'src/interface/AuthResponse';
 
@@ -13,18 +13,24 @@ export class FirebaseService {
   ) { }
 
 
-  addCompanyData(data: RegistrationList) {
+  addRegistrationData(data: RegistrationList) {
     data.id = doc(collection(this.fService, 'id')).id
     return addDoc(collection(this.fService, 'RegistrationList'), data)
   }
 
-  getAllRegistrationList() {
+  getAllRegistrationData() {
     let dataRef = collection(this.fService, `RegistrationList`)
     return collectionData(dataRef, { idField: 'id' })
   }
 
-  updateCompanyData(data: RegistrationList, RegistrationList: any) {
+  updateRegistrationData(data: RegistrationList, RegistrationList: any) {
     let dataRef = doc(this.fService, `RegistrationList/${data}`);
     return updateDoc(dataRef, RegistrationList)
   }
+
+  deleteRegistrationList(data: RegistrationList) {
+    let docRef = doc(collection(this.fService, `RegistrationList`), data.id);
+    return deleteDoc(docRef)
+  }
+
 }

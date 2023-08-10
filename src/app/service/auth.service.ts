@@ -44,7 +44,7 @@ export class AuthService {
   signOut(){
     this.user.next(null!)
     this.router.navigate(['/login']);
-    localStorage.removeItem('UserData')
+    localStorage.removeItem('AdminData')
     localStorage.clear()
   }
 
@@ -53,7 +53,8 @@ export class AuthService {
     const user =  new User(email,userId,token,expirationDate)
     this.user.next(user);
     this.isAuthToken = token
-    localStorage.setItem('UserData',JSON.stringify(user) )
+    localStorage.clear()
+    localStorage.setItem('AdminData',JSON.stringify(user) )
   } 
 
   forgotPassword(email:any){
@@ -72,6 +73,7 @@ export class AuthService {
   }
 
   isAuth() {
-    return this.isAuthToken
+    const userData:any = localStorage.getItem("AdminData")
+    return this.isAuthToken ? this.isAuthToken  : JSON.parse(userData)?._token
   }
 }
