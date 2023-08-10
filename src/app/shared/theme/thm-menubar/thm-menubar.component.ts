@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/service/auth.service';
 import { CommonService } from 'src/app/service/common.service';
 
 
@@ -56,7 +57,7 @@ export class ThmMenubarComponent implements OnInit {
   iconActiveIndex:number = 0
   isStatus : boolean  = true
   employeeId :any
-  constructor( private service: CommonService ,private router: Router) {}
+  constructor( private service: CommonService ,private router: Router , private authService:AuthService) {}
   
   ngOnInit(): void {
         this.service.iconActiveIconIndex$.subscribe((res) =>{
@@ -88,8 +89,7 @@ export class ThmMenubarComponent implements OnInit {
 
   logout(item:any){
     if(item.name === "Logout"){
-      localStorage.clear()
-      this.router.navigate(['/login'])
+      this.authService.signOut()
     }
   }
 
