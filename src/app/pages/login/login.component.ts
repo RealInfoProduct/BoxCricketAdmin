@@ -22,16 +22,24 @@ export class LoginComponent implements OnInit {
   matchedEmployee : any;
   CompanyLogin : boolean = false
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private formBuilder:FormBuilder ) { }
 
               
   ngOnInit(): void {
-
+    this.loginFormBuilder()
   }
+  loginFormBuilder(){
+    this.loginForm = this.formBuilder.group({
+      email : [],
+      password : []
 
+    })
+  }
 
   submit() { 
     this.router.navigate(['web/dashboard'])
+    console.log(this.loginForm.value);
+    
   }
 
 }

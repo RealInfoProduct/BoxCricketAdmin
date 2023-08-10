@@ -69,12 +69,54 @@
             </div>
             <div class="modal-body p-0">
                 <!-- ... add code ..  -->
+                <form [formGroup]="registrationForm">
                     <div class="row m-2">
                             <div class="col-6">
                                 <div class="form-group m-2">
-                                    <label for="text">Technology Name</label>
-                                    <input type="text" class="form-control"
-                                        placeholder="Enter Technology Name">
+                                    <label for="text">First Name</label>
+                                    <input type="text" class="form-control" formControlName="firstName"
+                                        placeholder="Enter First Name">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group m-2">
+                                    <label for="text">Last Name</label>
+                                    <input type="text" class="form-control" formControlName="lastName"
+                                        placeholder="Enter Last Name">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group m-2">
+                                    <label for="text">Email</label>
+                                    <input type="email" class="form-control" formControlName="email" 
+                                        placeholder="Enter Email ">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group m-2">
+                                    <label for="text">Password</label>
+                                    <input type="text" class="form-control" formControlName="password"
+                                        placeholder="Enter Password">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group m-2">
+                                    <label for="text">Box Address</label>
+                                  <textarea name="" formControlName="boxAddress" class="form-control" id="" cols="30" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group m-2">
+                                    <label for="text">Box No</label>
+                                    <input type="text" class="form-control" formControlName="boxNo"
+                                        placeholder="Enter box No">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group m-2">
+                                    <label for="text">Mobile No</label>
+                                    <input type="text" class="form-control" formControlName="mobileNo"
+                                        placeholder="Enter Mobile No">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +131,10 @@
                             </ng-container>
                     </div>
                 <!-- ... add code ..  -->
+            </form>
+
             </div>
+            
         </div>
     </div>
 </div>
