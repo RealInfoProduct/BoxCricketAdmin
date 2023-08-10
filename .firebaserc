@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "book-my-ground-2d99e"
+  },
+  "targets": {
+    "book-my-ground-2d99e": {
+      "hosting": {
+        "tr": [
+          "bookmyground"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

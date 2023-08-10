@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import * as moment from 'moment';
 import { msgType } from 'src/assets/constant/message';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   matchedEmployee : any;
   CompanyLogin : boolean = false
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private authService :AuthService ) { }
 
               
   ngOnInit(): void {
@@ -31,7 +32,18 @@ export class LoginComponent implements OnInit {
 
 
   submit() { 
-    this.router.navigate(['web/dashboard'])
+
+    const payload = {
+      userName: "realloc@gmail.com",
+      password : '123456'
+    }
+
+     this.authService.signIn(payload.userName ,payload.password).subscribe((res:any) => {
+      if(res){
+        console.log(res ,"res=========");
+        this.router.navigate(['web/dashboard'])
+      }
+     })
   }
 
 }

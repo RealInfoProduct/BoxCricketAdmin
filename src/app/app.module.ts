@@ -12,6 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from "@angular/fire/storage";
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment.prod';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,6 +38,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
+    provideFirebaseApp(()=>initializeApp(environment.firebaseConfig)),
+    provideFirestore(()=> getFirestore()),
+    provideAuth(() => getAuth()),
+    provideStorage(()=> getStorage()) ,
+
 
     // translation use 
     TranslateModule.forRoot({
