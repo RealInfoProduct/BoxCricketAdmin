@@ -24,13 +24,13 @@ export class ThmMenubarComponent implements OnInit {
       ],
     },
     {
-      icon:'ri-cpu-line ri-lg',
-      name:'Dashboard2',
-      url:'#',
+      icon:'ri-user-3-line ri-lg',
+      name:'Registration',
+      url:'/web/registration',
       children : [
         {
-          name:'Dashboard2',
-          url:'#',
+          name:'Registration',
+          url:'/web/registration',
         },
       ],
     },
