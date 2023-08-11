@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private messageService :MessageService
   ) { }
 
               
@@ -52,14 +53,32 @@ export class LoginComponent implements OnInit {
   submit() { 
     if (this.registrationList.length > 0) {
       const employeeFind = this.registrationList.find((id:any) => id.email === this.loginForm.value.email)
-      if(employeeFind){
+      if(employeeFind && employeeFind?.status.name === "Active"){
         localStorage.clear()
         localStorage.setItem("UserId",employeeFind.id)
-      } else {
+        this.router.navigate(['web/dashboard'])
+
+      } else if(employeeFind?.status?.name === "Inactive"){
+        this.messageService.add({
+          severity: msgType.error,
+          summary: 'Sucess',
+          detail: 'user can not active..',
+          life: 1500,
+        });
+      } 
+      else {
         this.authService.signIn(this.loginForm.value.email ,this.loginForm.value.password).subscribe((res:any) => {
          if(res){
            this.router.navigate(['web/dashboard'])
          }
+        }, (error) => {
+          this.messageService.add({
+            severity: msgType.error,
+            summary: 'Error',
+            detail: error.error.error.message,
+            life: 1500,
+          });
+          this.isLoading = false
         })
       }
     }

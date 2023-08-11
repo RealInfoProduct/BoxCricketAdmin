@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'web',
     loadChildren: () => import('./web/web.module').then(m => m.WebModule),
-    canActivate: [ AuthGuardService ]
+    // canActivate: [ AuthGuardService ]
 
   }
 ];

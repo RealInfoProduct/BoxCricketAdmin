@@ -12,41 +12,56 @@ import { CommonService } from 'src/app/service/common.service';
 })
 export class ThmMenubarComponent implements OnInit {
   
-  menuList:any = [
+  menuList: any = [];
+
+  menuListForAdmin: any = [
     {
-      icon:'ri-home-5-line ri-lg',
-      name:'Dashboard',
-      url:'/web/dashboard',
-      children : [
+      icon: 'ri-home-5-line ri-lg',
+      name: 'Dashboard',
+      url: '/web/dashboard',
+      children: [
         {
-          name:'Dashboard',
-          url:'/web/dashboard',
+          name: 'Dashboard',
+          url: '/web/dashboard',
         },
       ],
     },
     {
-      icon:'ri-user-3-line ri-lg',
-      name:'Registration',
-      url:'/web/registration',
-      children : [
+      icon: 'ri-user-3-line ri-lg',
+      name: 'Registration',
+      url: '/web/registration',
+      children: [
         {
-          name:'Registration',
-          url:'/web/registration',
+          name: 'Registration',
+          url: '/web/registration',
         },
       ],
     },
     {
-      icon:'ri-logout-box-r-line ri-lg',
-      name:'Logout',
-      url:'#',
-      children : [
+      icon: 'ri-logout-box-r-line ri-lg',
+      name: 'Logout',
+      url: '#',
+      children: [
         {
-          name:'Logout',
-          url:'/login'
+          name: 'Logout',
+          url: '/login'
         },
       ],
     }
-  ];
+  ]
+  menuListForOwner: any = [
+    {
+      icon: 'ri-logout-box-r-line ri-lg',
+      name: 'Logout',
+      url: '#',
+      children: [
+        {
+          name: 'Logout',
+          url: '/login'
+        },
+      ],
+    }
+  ]
 
   menuIconList:any = []
   subMenuList:any = []
@@ -57,18 +72,25 @@ export class ThmMenubarComponent implements OnInit {
   iconActiveIndex:number = 0
   isStatus : boolean  = true
   employeeId :any
+  isAdmin : any;
+  isUser : any;
   constructor( private service: CommonService ,private router: Router , private authService:AuthService) {}
   
   ngOnInit(): void {
+    this.isAdmin = localStorage.getItem('AdminData')
+    if (this.isAdmin ) {
+      this.menuList = this.menuListForAdmin
+    } else {
+      this.menuList = this.menuListForOwner
+    }
+    this.menuIconList = this.menuList;
         this.service.iconActiveIconIndex$.subscribe((res) =>{
           const index = res?.index
           const name = res?.name
           this.isStatus = true
           this.iconActive(index,name)
         })
- 
-          this.menuIconList = this.menuList;
-  
+       
   }
  
 
