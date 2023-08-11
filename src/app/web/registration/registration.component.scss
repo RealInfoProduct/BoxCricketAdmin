@@ -49,3 +49,7 @@
        min-height: calc(100vh - 175px);
      }
 }
+::ng-deep .p-element .p-dropdown span {
+    width: 332px;
+    padding: 7px 13px;
+}
