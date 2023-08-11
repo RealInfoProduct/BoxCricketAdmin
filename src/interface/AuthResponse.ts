@@ -16,4 +16,5 @@ export interface RegistrationList {
     boxAddress:string,
     boxNo:string,
     mobileNo :string,
+    status : string
 }

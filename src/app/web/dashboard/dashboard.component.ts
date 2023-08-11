@@ -75,7 +75,6 @@ export class DashboardComponent implements OnInit {
     // arr.pipe(
     //   mergeMap((res,index) => this.getAllData(res,index))
     // ).subscribe(response => {
-    //   console.log('sds----',response);
     // });
   }
 

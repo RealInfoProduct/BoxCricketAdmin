@@ -17,6 +17,15 @@ export class RegistrationComponent implements OnInit {
   isLoading: boolean = false
   registrationData :any = []
   editUserId :any 
+  userStatus :any = [
+    {
+      name:'Inactive'
+    },
+    {
+      name:'Active'
+    }
+  ]
+  selectedStatus :any 
 
   
   constructor( private formBuilder:FormBuilder ,
@@ -38,7 +47,7 @@ export class RegistrationComponent implements OnInit {
       boxAddress : ['', Validators.required],
       boxNo : ['', Validators.required],
       mobileNo : ['', Validators.required], 
-
+      selectedStatus : [this.userStatus[0], Validators.required]
 
     })
   }
@@ -51,6 +60,7 @@ export class RegistrationComponent implements OnInit {
     this.isEdit = true
     this.editUserId = item.id 
     this.registrationForm.patchValue(item);
+    this.registrationForm.controls['selectedStatus'].setValue(item.status)
   }
 
   deleteRegistration(item:any){
@@ -83,15 +93,30 @@ export class RegistrationComponent implements OnInit {
       boxAddress: this.registrationForm.value.boxAddress,
       boxNo: this.registrationForm.value.boxNo,
       mobileNo: this.registrationForm.value.mobileNo,
+      status : this.registrationForm.value.selectedStatus
+
     }
     this.isLoading = true
+    
     if (this.isEdit) {
       this.firebaseService.updateRegistrationData(this.editUserId, payload).then((res:any) => {
+        this.messageService.add({
+          severity: msgType.success,
+          summary: 'Sucess',
+          detail: 'Data UpDate Successfully..',
+          life: 1500,
+        });
         this.isLoading = false
       })
     } else {
       this.firebaseService.addRegistrationData(payload).then((res:any) => {
         if (res) {
+          this.messageService.add({
+            severity: msgType.success,
+            summary: 'Sucess',
+            detail: 'Data Add Successfully..',
+            life: 1500,
+          });
           this.isLoading = false
         }   
       })

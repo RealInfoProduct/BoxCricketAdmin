@@ -25,6 +25,7 @@
                         <th style="width: 25%;">Box Address</th>
                         <th style="width: 15%;">Box No</th>
                         <th style="width: 15%;">Mobile No</th>
+                        <th style="width: 15%;">Status</th>
                         <th style="width: 10%;">Action</th>
                     </tr>
                 </ng-template>
@@ -38,6 +39,7 @@
                         <td style="width: 25%;">{{item.boxAddress}}</td>
                         <td style="width: 15%;">{{item.boxNo}}</td>
                         <td style="width: 15%;">{{item.mobileNo}}</td>
+                        <td style="width: 15%;">{{item.status.name}}</td>
                         <td style="width: 10%;">
                             <div class="button_icon_edit" data-bs-toggle="modal" data-bs-target="#FirmModal" (click)="editRegistration(item)" >
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -71,55 +73,45 @@
                 <!-- ... add code ..  -->
                 <form [formGroup]="registrationForm">
                     <div class="row m-2">
-                            <div class="col-6">
-                                <div class="form-group m-2">
-                                    <label for="text">First Name</label>
-                                    <input type="text" class="form-control" formControlName="firstName"
-                                        placeholder="Enter First Name">
-                                </div>
+                        <div class="col-6">
+                            <div class="form-group m-2">
+                                <label for="text">First Name</label>
+                                <input type="text" class="form-control" formControlName="firstName" placeholder="Enter First Name">
                             </div>
-                            <div class="col-6">
-                                <div class="form-group m-2">
-                                    <label for="text">Last Name</label>
-                                    <input type="text" class="form-control" formControlName="lastName"
-                                        placeholder="Enter Last Name">
-                                </div>
+                            <div class="form-group m-2">
+                                <label for="text">Email</label>
+                                <input type="email" class="form-control" formControlName="email" placeholder="Enter Email ">
                             </div>
-                            <div class="col-6">
-                                <div class="form-group m-2">
-                                    <label for="text">Email</label>
-                                    <input type="email" class="form-control" formControlName="email" 
-                                        placeholder="Enter Email ">
-                                </div>
+                            <div class="form-group m-2">
+                                <label for="text">Box Address</label>
+                                <textarea name="" formControlName="boxAddress" class="form-control" id="" cols="30" rows="3"></textarea>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group m-2">
-                                    <label for="text">Password</label>
-                                    <input type="text" class="form-control" formControlName="password"
-                                        placeholder="Enter Password">
-                                </div>
+                            <div class="form-group m-2">
+                                <label for="text">Mobile No</label>
+                                <input type="text" class="form-control" formControlName="mobileNo" placeholder="Enter Mobile No">
                             </div>
-                            <div class="col-6">
-                                <div class="form-group m-2">
-                                    <label for="text">Box Address</label>
-                                  <textarea name="" formControlName="boxAddress" class="form-control" id="" cols="30" rows="3"></textarea>
-                                </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group m-2">
+                                <label for="text">Last Name</label>
+                                <input type="text" class="form-control" formControlName="lastName" placeholder="Enter Last Name">
                             </div>
-                            <div class="col-6">
-                                <div class="form-group m-2">
-                                    <label for="text">Box No</label>
-                                    <input type="text" class="form-control" formControlName="boxNo"
-                                        placeholder="Enter box No">
-                                </div>
+                            <div class="form-group m-2">
+                                <label for="text">Password</label>
+                                <input type="text" class="form-control" formControlName="password" placeholder="Enter Password">
                             </div>
-                            <div class="col-6">
-                                <div class="form-group m-2">
-                                    <label for="text">Mobile No</label>
-                                    <input type="text" class="form-control" formControlName="mobileNo"
-                                        placeholder="Enter Mobile No">
+                            <div class="form-group m-2">
+                                <label for="text">Box No</label>
+                                <input type="text" class="form-control" formControlName="boxNo" placeholder="Enter box No">
+                            </div>
+                            <div class="form-group m-2">
+                                <label for="text">Select Status</label>
+                                <div>
+                                    <p-dropdown [options]="userStatus" formControlName="selectedStatus" optionLabel="name"></p-dropdown>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     <div class="modal-footer">                        
                             <ng-container *ngIf="!isEdit">
                                 <button data-bs-dismiss="modal" aria-label="Close"  
